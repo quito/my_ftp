@@ -19,23 +19,29 @@ static int	check_ip(char *str)
   int		count_p;
   int		count_nb;
 
+  count_nb = 0;
+  count_p = 0;
+  i = 0;
   if (!(str[0] <= '9' && str[0] > '0'))
     return (0);
   while (str[i])
     {
-      if (str[0] <= '9' && str[0] > '0')
+      if (str[i] <= '9' && str[i] >= '0')
 	count_nb++;
       if (count_nb > 3)
-	return (0);
-      if (str[0] == '.')
+	{	printf("1: %d\n", count_nb);
+	  return (0);}
+      if (str[i] == '.')
 	count_nb = 0;
-      if (str[0] == '.')
+      if (str[i] == '.')
 	count_p++;
       if (count_p > 3)
 	return (0);
       i++;
     }
-  return (1);
+  if (count_p == 3)
+    return (1);
+  return (0);
 }
 
 static int	get_opt(t_info *info, char *ip, char *port)

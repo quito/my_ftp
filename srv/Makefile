@@ -12,7 +12,7 @@ NAME	=	serveur
 
 CC	=	gcc
 
-CFLAGS	=	-Wall -Wextra -ansi
+CFLAGS	=	-Wall -Wextra -ansi -ggdb
 
 LDFLAGS	=	
 

@@ -12,12 +12,13 @@ NAME	=	client
 
 CC	=	gcc
 
-CFLAGS	=	-Wall -Wextra -ansi
+CFLAGS	=	-Wall -Wextra -ansi -ggdb
 
 LDFLAGS	=	
 
 SRC	=	main.c \
-		init_client.c
+		init_client.c \
+		init_socket.c
 
 OBJ	=	$(SRC:.c=.o)
 

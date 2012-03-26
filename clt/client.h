@@ -11,12 +11,21 @@
 #ifndef CLIENT_H_
 # define CLIENT_H_
 
+# include <sys/types.h>
+# include <sys/socket.h>
+# include <netinet/in.h>
+# include <arpa/inet.h>
+
 typedef struct	s_info
 {
-  char		*serv_ip;
-  int		port;
-}		t_info;
+  char			*serv_ip;
+  int			port;
+  struct sockaddr_in	sock_in;
+  struct sockaddr	sockaddr;
+  int			socket;
+}			t_info;
 
 int		init_client(t_info *info, char **av);
+int		init_socket(t_info *info);
 
 #endif 

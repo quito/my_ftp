@@ -16,4 +16,6 @@ typedef struct	s_info
   int		port;
 }		t_info;
 
+int		init_serv(t_info *info, char **av);
+
 #endif

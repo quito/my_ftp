@@ -23,12 +23,10 @@ int		main(int ac, char **av)
 
   if (ac == 2)
     {
-      if (init_serv(&info, av[1]))
+      if (init_serv(&info, av))
 	{
 	  return (EXIT_SUCCESS);
 	}
-      else
-	fprintf(stderr, "Init failed\n");
     }
   else
     print_usage(av[0]);

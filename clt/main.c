@@ -25,8 +25,9 @@ int		main(int ac, char **av)
 
   if (ac == 3)
     {
-      if (init_client(&info, av))
+      if (init_client(&info, av) && init_socket(&info))
 	{
+	  
 	  return (EXIT_SUCCESS);
 	}
     }
