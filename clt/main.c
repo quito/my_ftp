@@ -9,8 +9,28 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
+#include "client.h"
 
-int	main(int ac, char **av)
+static void	print_usage(char *str)
 {
-  return (EXIT_SUCCESS);
+  fprintf(stderr, "Usage : %s server_addr port\n", str);
+  fprintf(stderr, "\n\t server_addr :\t IP adress of the ftp server\n");
+  fprintf(stderr, "\t port :\t port of the ftp server\n");
+}
+
+int		main(int ac, char **av)
+{
+  t_info	info;
+
+  if (ac == 3)
+    {
+      if (init_client(&info, av))
+	{
+	  return (EXIT_SUCCESS);
+	}
+    }
+  else
+    print_usage(av[0]);
+  return (EXIT_FAILURE);
 }

@@ -9,8 +9,28 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
+#include "server.h"
 
-int	main(int ac, char **av)
+static void	print_usage(char *str)
 {
-  return (EXIT_SUCCESS);
+  fprintf(stderr, "Usage : %s port\n", str);
+}
+
+int		main(int ac, char **av)
+{
+  t_info	info;
+
+  if (ac == 2)
+    {
+      if (init_serv(&info, av[1]))
+	{
+	  return (EXIT_SUCCESS);
+	}
+      else
+	fprintf(stderr, "Init failed\n");
+    }
+  else
+    print_usage(av[0]);
+  return (EXIT_FAILURE);
 }

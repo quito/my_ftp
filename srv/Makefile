@@ -16,7 +16,8 @@ CFLAGS	=	-Wall -Wextra -ansi
 
 LDFLAGS	=	
 
-SRC	=	main.c
+SRC	=	main.c \
+		init_serv.c
 
 OBJ	=	$(SRC:.c=.o)
 

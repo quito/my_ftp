@@ -16,7 +16,8 @@ CFLAGS	=	-Wall -Wextra -ansi
 
 LDFLAGS	=	
 
-SRC	=	main.c
+SRC	=	main.c \
+		init_client.c
 
 OBJ	=	$(SRC:.c=.o)
 

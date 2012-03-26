@@ -26,6 +26,6 @@ fclean:
 		$(MAKE) fclean -C $(CLIENT_PATH)
 		$(MAKE) fclean -C $(SRV_PATH)
 		rm -f ./client
-		rm -f ./client
+		rm -f ./serveur
 
 re:		fclean all
