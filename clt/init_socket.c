@@ -26,7 +26,7 @@ int	init_socket(t_info *info)
   info->sock_in.sin_addr.s_addr = inet_addr(info->serv_ip);
   info->sock_in.sin_family = AF_INET;
   info->sock_in.sin_port = htons(info->port);
-  printf("[*] Connection... Waiting for host...\n");
+  printf("[*] Connecting to %s... Waiting for host...\n", info->serv_ip);
   if (connect(info->socket,
 	      (struct sockaddr*)(&(info->sock_in)),
 	      sizeof (info->sock_in)) == -1)
