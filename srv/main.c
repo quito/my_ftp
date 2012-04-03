@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include "server.h"
 
+t_info		g_info;
+
 static void	print_usage(char *str)
 {
   fprintf(stderr, "Usage : %s port\n", str);
@@ -19,13 +21,13 @@ static void	print_usage(char *str)
 
 int		main(int ac, char **av)
 {
-  t_info	info;
-
   if (ac == 2)
     {
-      if (init_serv(&info, av))
+      if (init_serv(&g_info, av) && init_socket(&g_info))
 	{
-	  return (EXIT_SUCCESS);
+	  if (waiting_for_connection(&g_info))
+	    return (EXIT_SUCCESS);
+	  return (EXIT_FAILURE);
 	}
     }
   else

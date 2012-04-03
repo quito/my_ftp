@@ -31,5 +31,8 @@ int	init_serv(t_info *info, char **av)
 {
   if (!get_opt(info, av[1]))
     return (0);
+  info->accept_connections = 1;
+  info->pid_list = NULL;
+  manage_signal();
   return (1);
 }

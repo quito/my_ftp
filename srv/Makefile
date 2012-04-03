@@ -12,19 +12,28 @@ NAME	=	serveur
 
 CC	=	gcc
 
-CFLAGS	=	-Wall -Wextra -ansi -ggdb
+CFLAGS	=	-Wall -Wextra -ansi -ggdb -D _BSD_SOURCE
 
-LDFLAGS	=	
+LDFLAGS	=	-lcrypt
 
 SRC	=	main.c \
-		init_serv.c
+		init_serv.c \
+		init_socket.c \
+		waiting_for_connection.c \
+		list.c \
+		signal_manager.c \
+		client_manager.c \
+		ls_dir.c \
+		write_secure.c \
+		send_fail.c \
+		send_error.c
 
 OBJ	=	$(SRC:.c=.o)
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-		$(CC) $(OBJ) -o $(NAME)
+		$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
 
 clean:
 		rm -rf $(OBJ)

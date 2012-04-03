@@ -27,5 +27,6 @@ typedef struct	s_info
 
 int		init_client(t_info *info, char **av);
 int		init_socket(t_info *info);
+int		run_client(t_info *info);
 
 #endif 

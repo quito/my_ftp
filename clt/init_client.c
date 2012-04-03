@@ -56,7 +56,10 @@ static int	get_opt(t_info *info, char *ip, char *port)
     }
   info->port = p;
   if (check_ip(ip))
-    return (1);
+    {
+      info->serv_ip = ip;
+      return (1);
+    }
   fprintf(stderr, "Error : Bad ip. Try something like 192.168.1.12\n");
   return (0);
 }

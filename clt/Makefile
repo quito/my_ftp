@@ -18,7 +18,8 @@ LDFLAGS	=
 
 SRC	=	main.c \
 		init_client.c \
-		init_socket.c
+		init_socket.c \
+		run_client.c
 
 OBJ	=	$(SRC:.c=.o)
 

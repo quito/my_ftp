@@ -27,8 +27,9 @@ int		main(int ac, char **av)
     {
       if (init_client(&info, av) && init_socket(&info))
 	{
-	  
-	  return (EXIT_SUCCESS);
+	  if (run_client(&info))
+	    return (EXIT_SUCCESS);
+	  return (EXIT_FAILURE);
 	}
     }
   else
