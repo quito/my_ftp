@@ -14,7 +14,7 @@
 #include <string.h>
 #include "server.h"
 
-int	send_error(t_info *info, char *str, int num)
+int	send_answer(t_info *info, char *str, int num)
 {
   char	buff[257];
 
@@ -26,5 +26,5 @@ int	send_error(t_info *info, char *str, int num)
     }
   else
     snprintf(buff, 256, "%d\n", num);
-  return (write_secure(info->csock, buff, strlen(buff)));
+  return (write_secure(info->csock, buff, strlen(buff), info));
 }

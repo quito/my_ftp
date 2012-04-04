@@ -13,6 +13,7 @@
 
 # include <arpa/inet.h>
 
+# define USERSFILE	"users.ftp"
 # define WELCOME_MSG	"Welcome on my server"
 # define BUFF_SIZE	256
 
@@ -22,21 +23,32 @@ typedef struct		s_list
   struct s_list		*next;
 }			t_list;
 
+typedef struct		s_user
+{
+  char			*name;
+  char			*pass;
+}			t_user;
+
 typedef struct		s_info
 {
   t_list		*pid_list;
+  t_list		*users_list;
   int			port;
   int			socket;
   struct sockaddr_in	sin;
   struct sockaddr_in	sin_client;
   int			accept_connections;
+  int			keep_connected;
   int			csock;
 }			t_info;
+
+typedef int		(*cmd_ptr)(t_info *, char *);
 
 typedef struct		s_cmd
 {
   char			*name;
-  char			(*cmd_func)(t_info *, char *);
+  cmd_ptr		ptr;
+  int			category;
 }			t_cmd;
 
 int		init_serv(t_info *info, char **av);
@@ -47,6 +59,10 @@ t_list		*push_back_list(t_list *list, void *data);
 void		waiting_for_pid(t_list *list);
 int		client_manager(t_info *info);
 void		manage_signal(void);
-int		write_secure(int fd, char *str, unsigned int size);
+int		write_secure(int fd, char *str, unsigned int size, t_info *info);
+int		send_answer(t_info *info, char *str, int num);
+char		*get_cmd_arg(char *str);
+int		cmd_noop(t_info *info, char *str);
+int		cmd_user(t_info *info, char *str);
 
 #endif

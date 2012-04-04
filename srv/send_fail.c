@@ -26,5 +26,5 @@ int	send_fail(t_info *info, char *str, int num)
     }
   else
     snprintf(buff, 256, "%d\n", num);
-  return (write_secure(info->csock, buff, strlen(buff)));
+  return (write_secure(info->csock, buff, strlen(buff), info));
 }

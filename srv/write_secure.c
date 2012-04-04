@@ -12,14 +12,20 @@
 #include <stdio.h>
 #include "server.h"
 
-int	write_secure(int fd, char *str, unsigned int size)
+int	write_secure(int fd, char *str, unsigned int size, t_info *info)
 {
   int	ret;
 
   ret = write(fd, str, size);
   if (ret == 0)
-    fprintf(stderr, "Disconnected from client\n");
+    {
+      info->keep_connected = 0;
+      fprintf(stderr, "Disconnected from client\n");
+    }
   else if (ret < 0)
-    perror("write");
+    {
+      info->keep_connected = 0;
+      perror("write");
+    }
   return (ret);
 }
