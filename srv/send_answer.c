@@ -22,7 +22,7 @@ int	send_answer(t_info *info, char *str, int num)
   if (str)
     {    
       snprintf(buff, 256, "%d %s\n", num, str);
-      fprintf(stderr, "%d %s\n", num, str);
+      printf("%d %s\n", num, str);
     }
   else
     snprintf(buff, 256, "%d\n", num);

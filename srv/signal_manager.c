@@ -10,6 +10,7 @@
 
 #include <signal.h>
 #include <stdio.h>
+#include <unistd.h>
 #include "server.h"
 
 extern t_info	g_info;
@@ -17,8 +18,11 @@ extern t_info	g_info;
 void		manage_sig(int sig)
 {
   (void)sig;
-  printf("[\033[31;1m-\033[0m] Killing server...");
+  printf("[\033[31;1m-\033[0m] Killing server...\n");
   g_info.accept_connections = 0;
+  g_info.keep_connected = 0;
+  close(g_info.csock);
+  manage_signal();
 }
 
 void		manage_signal(void)

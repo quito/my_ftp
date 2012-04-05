@@ -27,6 +27,7 @@ static int	check_user(t_info *info, char *arg)
       user = list->data;
       if (user && arg && strcmp(user->name, arg) == 0)
 	{
+	  info->user_selected = user->name;
 	  if (user->pass)
 	    return (2);
 	  return (1);
@@ -56,8 +57,9 @@ int		cmd_user(t_info *info, char *str)
   if (ret == 1)
     {
       snprintf(buffer, 255, "User %s logged in.", arg);
-      send_answer(info, buffer, 230);
+      return (log_user(info, buffer, 230));
     }
+  snprintf(buffer, 255, "Password required for %s.", arg);
   send_answer(info, buffer, 331);
   return (1);
 }

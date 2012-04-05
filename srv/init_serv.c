@@ -9,6 +9,7 @@
 */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include "server.h"
@@ -78,15 +79,29 @@ static int	get_users(t_info *info)
   return (1);
 }
 
+static int	get_path(t_info *info)
+{
+  if ((info->server_path = getcwd(NULL, 256)) == NULL)
+    {
+      perror("getcwd");
+      return (0);
+    }
+  return (1);
+}
+
 int	init_serv(t_info *info, char **av)
 {
   if (!get_opt(info, av[1]))
     return (0);
   info->accept_connections = 1;
   info->keep_connected = 1;
+  info->is_auth = 0;
   info->pid_list = NULL;
   info->users_list = NULL;
-  if (!get_users(info))
+  info->is_user_selected = 0;
+  info->user_selected = NULL;
+  info->dtp = NULL;
+  if (!get_users(info) || !get_path(info))
     return (0);
   manage_signal();
   return (1);

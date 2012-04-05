@@ -14,6 +14,7 @@
 # include <arpa/inet.h>
 
 # define USERSFILE	"users.ftp"
+# define ACCOUNT_PATH	"account"
 # define WELCOME_MSG	"Welcome on my server"
 # define BUFF_SIZE	256
 
@@ -29,10 +30,28 @@ typedef struct		s_user
   char			*pass;
 }			t_user;
 
+typedef struct		s_pasv_dtp
+{
+  int			port;
+  int			socket;
+  struct sockaddr_in	sin;
+  struct sockaddr_in	sin_client;
+  int			accept_connections;
+  int			c_sock;
+}			t_pasv_dtp;
+
 typedef struct		s_info
 {
+  t_pasv_dtp		*dtp;
   t_list		*pid_list;
   t_list		*users_list;
+  int			is_auth;
+  int			is_user_selected;
+  char			*user_selected;
+
+  char			cur_path[256];
+  char			*server_path;
+
   int			port;
   int			socket;
   struct sockaddr_in	sin;
@@ -61,8 +80,14 @@ int		client_manager(t_info *info);
 void		manage_signal(void);
 int		write_secure(int fd, char *str, unsigned int size, t_info *info);
 int		send_answer(t_info *info, char *str, int num);
+int		my_chdir(char *path, t_info *info);
 char		*get_cmd_arg(char *str);
+void		delete_endline(char *str);
+int		log_user(t_info *info, char *buffer, int nb);
 int		cmd_noop(t_info *info, char *str);
 int		cmd_user(t_info *info, char *str);
+int		cmd_pass(t_info *info, char *str);
+int		cmd_pwd(t_info *info, char *str);
+int		cmd_type(t_info *info, char *str);
 
 #endif

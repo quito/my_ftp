@@ -29,6 +29,7 @@ int		ls_dir(t_info *info)
     }
   while ((file = readdir(dir)) != NULL)
     {
+      
     }
   if (closedir(dir) == -1)
     {

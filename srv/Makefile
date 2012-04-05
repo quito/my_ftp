@@ -12,7 +12,7 @@ NAME	=	serveur
 
 CC	=	gcc
 
-CFLAGS	=	-Wall -Wextra -ansi -I. -D _BSD_SOURCE -D _XOPEN_SOURCE=700  -ggdb 
+CFLAGS	=	-Wall -Wextra -ansi -I. -D _BSD_SOURCE -D _XOPEN_SOURCE=700 -D _GNU_SOURCE -ggdb 
 
 LDFLAGS	=	-lcrypt
 
@@ -26,9 +26,15 @@ SRC	=	main.c \
 		ls_dir.c \
 		write_secure.c \
 		send_answer.c \
+		my_chdir.c \
 		cmd/get_cmd_arg.c \
+		cmd/login.c \
 		cmd/noop.c \
-		cmd/user.c
+		cmd/user.c \
+		cmd/pass.c \
+		cmd/type.c \
+		cmd/pwd.c \
+		cmd/pasv.c
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -11,6 +11,19 @@
 #include <stdlib.h>
 #include "server.h"
 
+void	delete_endline(char *str)
+{
+  int	j;
+
+  j = 0;
+  while (str[j])
+    {
+      if (str[j] == '\n' || str[j] == '\r')
+	str[j] = '\0';
+      j++;
+    }  
+}
+
 char	*get_cmd_arg(char *str)
 {
   int	i;
