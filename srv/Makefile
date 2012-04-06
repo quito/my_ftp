@@ -34,7 +34,9 @@ SRC	=	main.c \
 		cmd/pass.c \
 		cmd/type.c \
 		cmd/pwd.c \
-		cmd/pasv.c
+		cmd/cwd.c \
+		cmd/pasv.c \
+		cmd/list.c
 
 OBJ	=	$(SRC:.c=.o)
 
