@@ -45,7 +45,7 @@ t_cmd		g_cmd_tab[] =
     {"QUIT", NULL, 1},
     {"REIN", NULL, 1},
     {"TYPE", cmd_type, 1},
-    {"PASV", NULL, 1},
+    {"PASV", cmd_pasv, 1},
     {"MODE", NULL, 1},
     {"RNFR", NULL, 1},
     {"RNTO", NULL, 2},

@@ -57,15 +57,37 @@ int			dtp_init_socket(t_pasv_dtp *info)
   return (1);
 }
 
+static int	build_answer(t_info *info, char *buffer)
+{
+  t_pasv_dtp	*dtp;
+  char		*ip;
+
+  dtp = info->dtp;
+  ip = (char *)&(dtp->sin.sin_addr.s_addr);
+  snprintf(buffer, 256, "Entering Passive Mode (%d,%d,%d,%d,%d,%d)",
+	   ((int)ip[1]) & 0xFF,
+	   ((int)ip[2]) & 0xFF,
+	   ((int)ip[3]) & 0xFF,
+	   ((int)ip[4]) & 0xFF,
+	   (((int)dtp->sin.sin_port) >> 8) & 0xFF,
+	   ((int)dtp->sin.sin_port) & 0xFF);
+  return (1);
+}
+
 int		cmd_pasv(t_info *info, char *str)
 {
+  char		buffer[256];
+
   (void)str;
   if ((info->dtp = malloc(sizeof(*(info->dtp)))) == NULL ||
       !dtp_init_socket(info->dtp))
     {
       send_answer(info, "Cannot open a connection", 530);
+      free(info->dtp);
       return (0);
     }
+  build_answer(info, &(buffer[0]));
+  send_answer(info, buffer, 227);
   /* construction et envoi de la reponse */
   return (1);
 }
