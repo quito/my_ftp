@@ -38,7 +38,7 @@ static int	send_file(t_info *info, FILE *file)
       close_dtp(info);
     }
   memset(buffer, 0, 512);
-  while ((ret = fread(buffer, 512, 1, file)) > 0)
+  while ((ret = fread(buffer, 1, 512, file)) > 0)
     {
       write_secure(info->dtp->c_sock, buffer, ret, info);
       printf("%s", buffer);
@@ -64,6 +64,8 @@ int		cmd_list(t_info *info, char *str)
     }
   send_answer(info, "Opening ASCII mode data connection for file list", 150);
   send_file(info, file);
+  send_answer(info, "Transfert complete", 226);
+  close_dtp(info);
   pclose(file);
   return (1);
 }

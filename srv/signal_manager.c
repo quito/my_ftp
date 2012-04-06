@@ -11,9 +11,22 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/types.h>
 #include "server.h"
 
 extern t_info	g_info;
+
+static void	kill_son(t_list *list)
+{
+  long int		pid;
+
+  while (list)
+    {
+      pid = (long int)list->data;
+      kill(pid, SIGINT);
+      list = list->next;
+    }
+}
 
 void		manage_sig(int sig)
 {
@@ -22,6 +35,7 @@ void		manage_sig(int sig)
   g_info.accept_connections = 0;
   g_info.keep_connected = 0;
   close(g_info.csock);
+  kill_son(g_info.pid_list);
   manage_signal();
 }
 
