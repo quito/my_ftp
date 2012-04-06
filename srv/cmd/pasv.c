@@ -28,6 +28,7 @@ static int		dtp_init_addr(t_pasv_dtp *info)
   err = bind(info->socket,
 	     (const struct sockaddr *)(&(info->sin)),
 	     sizeof(info->sin));
+  
   if (err == -1)
     {
       perror("Bind");
@@ -44,6 +45,7 @@ int			dtp_init_socket(t_pasv_dtp *info)
 {
   struct protoent	*pe;
   
+  memset(info, 0, sizeof(*info));
   if ((pe = getprotobyname("TCP")) == NULL)
     {
       fprintf(stderr, "Cannot perform a getprotobyname\n");
@@ -60,7 +62,7 @@ int			dtp_init_socket(t_pasv_dtp *info)
     {
       perror("listen");
       return (0);
-    }    
+    }
   return (1);
 }
 
@@ -91,36 +93,37 @@ int			dtp_init_socket(t_pasv_dtp *info)
 static int              build_answer(int fd, int sock_c, char *buf)
 { 
   socklen_t             l;
-  char                  *port;
+  unsigned short        port;
   char                  *ip;
   struct sockaddr_in    sp;
   struct sockaddr_in    si;
   char			buffer[64];
   struct hostent	*pe;
   
+
   l = sizeof(struct sockaddr_in);
   if (getsockname(sock_c, (struct sockaddr *)&sp, &l) < 0)
     { 
       perror("getsockname"); 
       return (0);
     }
-  port = (char *)&sp.sin_port;
+  port = ntohs(sp.sin_port);
+  printf("%hu", port);
   if (getsockname(fd, (struct sockaddr *)&si, &l) < 0)
     {
       perror("getsockname");
       return (0);
     }
-
+  
   ip = (char *)&si.sin_addr;
   /* gethostname(buffer, sizeof(buffer)); */
   /* pe = gethostbyname(buffer); */
   /* ip = pe->h_addr_list[0]; */
   /* if ((int)ip == 0) */
   /*   ip = "" */
-  printf("port : %d\n", port);
   snprintf(buf, 1024, "%d,%d,%d,%d,%d,%d",
-	   /* ip[0] & 0xff */127, /* ip[1] & 0xff */0, /* ip[2] & 0xff */0, /* ip[3] & 0xff */1,
-	   port[0] & 0xff, port[1] & 0xff);
+	   ip[0] & 0xff, ip[1] & 0xff, ip[2] & 0xff, ip[3] & 0xff,
+	   (port >> 8) & 0xff, port & 0xff);
   return (0);
 }  
 
@@ -136,7 +139,7 @@ int		cmd_pasv(t_info *info, char *str)
       free(info->dtp);
       return (0);
     }
-  build_answer(info->socket, info->dtp->socket, &(buffer[0]));
+  build_answer(info->csock, info->dtp->socket, &(buffer[0]));
   send_answer(info, buffer, 227);
   /* construction et envoi de la reponse */
   return (1);
