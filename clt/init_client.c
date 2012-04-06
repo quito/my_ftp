@@ -68,5 +68,6 @@ int	init_client(t_info *info, char **av)
 {
   if (!get_opt(info, av[1], av[2]))
     return (0);
+  info->keep_connected = 1;
   return (1);
 }

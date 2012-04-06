@@ -12,14 +12,17 @@ NAME	=	client
 
 CC	=	gcc
 
-CFLAGS	=	-Wall -Wextra -ansi -ggdb
+CFLAGS	=	-Wall -Wextra -ansi -ggdb -D _BSD_SOURCE
 
 LDFLAGS	=	
 
 SRC	=	main.c \
 		init_client.c \
 		init_socket.c \
-		run_client.c
+		run_client.c \
+		send_cmd.c \
+		cut_answer.c \
+		get_answer.c
 
 OBJ	=	$(SRC:.c=.o)
 

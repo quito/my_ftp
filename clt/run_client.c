@@ -12,9 +12,16 @@
 #include <stdio.h>
 #include "client.h"
 
+static int	open_session()
+{
+}
+
 int		run_client(t_info *info)
 {
   printf("[*] Waiting for Welcome message\n");
-  
+  while (info->keep_connected)
+    {
+    }
+  printf("[*] Disconnected from server\n");
   return (1);
 }

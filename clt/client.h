@@ -23,10 +23,13 @@ typedef struct	s_info
   struct sockaddr_in	sock_in;
   struct sockaddr	sockaddr;
   int			socket;
+  int			keep_connected;
 }			t_info;
 
 int		init_client(t_info *info, char **av);
 int		init_socket(t_info *info);
 int		run_client(t_info *info);
+int		get_num_answer(char *str);
+char		*get_arg_answer(char *str);
 
 #endif 
