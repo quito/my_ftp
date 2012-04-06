@@ -53,7 +53,7 @@ t_cmd		g_cmd_tab[] =
     {"DELE", NULL, 1},
     {"RMD", NULL, 1},
     {"MKD", NULL, 1},
-    {"LIST", NULL, 1},
+    {"LIST", cmd_list, 1},
     {"NLST", NULL, 1},
     {"SYST", NULL, 1},
     {"HELP", NULL, 1},

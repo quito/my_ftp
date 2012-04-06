@@ -90,5 +90,6 @@ int		cmd_pass(t_info *info, char *str);
 int		cmd_pwd(t_info *info, char *str);
 int		cmd_type(t_info *info, char *str);
 int		cmd_pasv(t_info *info, char *str);
+int		cmd_list(t_info *info, char *str);
 
 #endif

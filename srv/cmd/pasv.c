@@ -13,11 +13,14 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <string.h>
 #include "server.h"
 
 static int		dtp_init_addr(t_pasv_dtp *info)
 {
   int			err;
+  /* char			buffer[64]; */
+  /* struct hostent	*phe; */
 
   info->sin.sin_family = AF_INET;
   info->sin.sin_port = htons(0);
@@ -30,6 +33,10 @@ static int		dtp_init_addr(t_pasv_dtp *info)
       perror("Bind");
       return (0);
     }
+  
+  /* gethostname(buffer, sizeof(buffer)); */
+  /* phe = gethostbyname(buffer); */
+  /* memcpy(&(info->sin.sin_addr.s_addr), phe->h_addr, phe->h_length); */
   return (1);
 }
 
@@ -49,7 +56,7 @@ int			dtp_init_socket(t_pasv_dtp *info)
     }
   if (!dtp_init_addr(info))
     return (0);
-  if (listen(info->socket, 100) == -1)
+  if (listen(info->socket, 1) == -1)
     {
       perror("listen");
       return (0);
@@ -57,22 +64,65 @@ int			dtp_init_socket(t_pasv_dtp *info)
   return (1);
 }
 
-static int	build_answer(t_info *info, char *buffer)
-{
-  t_pasv_dtp	*dtp;
-  char		*ip;
+/* static int	build_answer(t_info *info, char *buffer) */
+/* { */
+/*   t_pasv_dtp	*dtp; */
+/*   char		*ip; */
+/*   char		*port; */
+/*   struct sockaddr_in    sport; */
+/*   struct sockaddr_in    sip; */
+/*   socklen_t	l; */
 
-  dtp = info->dtp;
-  ip = (char *)&(dtp->sin.sin_addr.s_addr);
-  snprintf(buffer, 256, "Entering Passive Mode (%d,%d,%d,%d,%d,%d)",
-	   ((int)ip[1]) & 0xFF,
-	   ((int)ip[2]) & 0xFF,
-	   ((int)ip[3]) & 0xFF,
-	   ((int)ip[4]) & 0xFF,
-	   (((int)dtp->sin.sin_port) >> 8) & 0xFF,
-	   ((int)dtp->sin.sin_port) & 0xFF);
-  return (1);
-}
+/*   dtp = info->dtp; */
+/*   l = sizeof(struct sockaddr_in); */
+/*   getsockname(dtp->socket, (struct sockaddr *)&sport, &l); */
+/*   getsockname(fd, (struct sockaddr *)&si, &l); */
+/*   /\* ip = (char *)&(dtp->sin.sin_addr.s_addr); *\/ */
+/*   /\* snprintf(buffer, 256, "Entering Passive Mode (%d,%d,%d,%d,%d,%d)", *\/ */
+/*   /\* 	   ((ip[1])) & 0xFF, *\/ */
+/*   /\* 	   ((ip[2])) & 0xFF, *\/ */
+/*   /\* 	   ((ip[3])) & 0xFF, *\/ */
+/*   /\* 	   ((ip[4])) & 0xFF, *\/ */
+/*   /\* 	   (((int)dtp->sin.sin_port) >> 8) & 0xFF, *\/ */
+/*   /\* 	   ((int)dtp->sin.sin_port) & 0xFF); *\/ */
+/*   return (1); */
+/* } */
+
+static int              build_answer(int fd, int sock_c, char *buf)
+{ 
+  socklen_t             l;
+  char                  *port;
+  char                  *ip;
+  struct sockaddr_in    sp;
+  struct sockaddr_in    si;
+  char			buffer[64];
+  struct hostent	*pe;
+  
+  l = sizeof(struct sockaddr_in);
+  if (getsockname(sock_c, (struct sockaddr *)&sp, &l) < 0)
+    { 
+      perror("getsockname"); 
+      return (0);
+    }
+  port = (char *)&sp.sin_port;
+  if (getsockname(fd, (struct sockaddr *)&si, &l) < 0)
+    {
+      perror("getsockname");
+      return (0);
+    }
+
+  ip = (char *)&si.sin_addr;
+  /* gethostname(buffer, sizeof(buffer)); */
+  /* pe = gethostbyname(buffer); */
+  /* ip = pe->h_addr_list[0]; */
+  /* if ((int)ip == 0) */
+  /*   ip = "" */
+  printf("port : %d\n", port);
+  snprintf(buf, 1024, "%d,%d,%d,%d,%d,%d",
+	   /* ip[0] & 0xff */127, /* ip[1] & 0xff */0, /* ip[2] & 0xff */0, /* ip[3] & 0xff */1,
+	   port[0] & 0xff, port[1] & 0xff);
+  return (0);
+}  
 
 int		cmd_pasv(t_info *info, char *str)
 {
@@ -86,7 +136,7 @@ int		cmd_pasv(t_info *info, char *str)
       free(info->dtp);
       return (0);
     }
-  build_answer(info, &(buffer[0]));
+  build_answer(info->socket, info->dtp->socket, &(buffer[0]));
   send_answer(info, buffer, 227);
   /* construction et envoi de la reponse */
   return (1);
