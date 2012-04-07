@@ -20,7 +20,7 @@ static int	check_pass(t_info *info, char *arg)
   char		*pass;
 
   list = info->users_list;
-  if (!arg && strlen(arg) <= 0)
+  if (!arg || strlen(arg) <= 0)
     return (0);
   if ((pass = crypt(arg, "$6$ft")) != NULL)
     {

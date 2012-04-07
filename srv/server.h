@@ -17,6 +17,8 @@
 # define ACCOUNT_PATH	"account"
 # define WELCOME_MSG	"Welcome on my server"
 # define BUFF_SIZE	256
+# define TYPE_A		1
+# define TYPE_I		2
 
 typedef struct		s_list
 {
@@ -48,6 +50,7 @@ typedef struct		s_info
   int			is_auth;
   int			is_user_selected;
   char			*user_selected;
+  int			data_type;
 
   char			cur_path[256];
   char			*server_path;
@@ -91,5 +94,9 @@ int		cmd_pwd(t_info *info, char *str);
 int		cmd_type(t_info *info, char *str);
 int		cmd_pasv(t_info *info, char *str);
 int		cmd_list(t_info *info, char *str);
+int		cmd_cdup(t_info *info, char *str);
+int		cmd_cwd(t_info *info, char *str);
+int		cmd_retr(t_info *info, char *str);
+int		close_dtp(t_info *info);
 
 #endif

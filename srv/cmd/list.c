@@ -14,7 +14,7 @@
 #include <string.h>
 #include "server.h"
 
-static int	close_dtp(t_info *info)
+int	close_dtp(t_info *info)
 {
   close(info->dtp->socket);
   close(info->dtp->c_sock);

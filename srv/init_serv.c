@@ -101,6 +101,7 @@ int	init_serv(t_info *info, char **av)
   info->is_user_selected = 0;
   info->user_selected = NULL;
   info->dtp = NULL;
+  memset(info->cur_path, 0, sizeof(info->cur_path));
   if (!get_users(info) || !get_path(info))
     return (0);
   manage_signal();

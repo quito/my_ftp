@@ -19,14 +19,14 @@ int		cmd_cwd(t_info *info, char *str)
 
   if ((arg = get_cmd_arg(str)) == NULL)
     {
-      /* fail */
+      send_answer(info, "Invalid number of arguments.", 501);
       return (0);
     }
   if (my_chdir(arg, info) == -1)
     {
-      /* fail */
+      send_answer(info, "No such file or directory.", 500);
       return (0);
     }
-  /* good */
+  send_answer(info, "CWD command successful.", 250);
   return (1);
 }

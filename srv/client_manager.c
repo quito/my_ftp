@@ -39,9 +39,10 @@ t_cmd		g_cmd_tab[] =
   {
     {"USER", cmd_user, 0},
     {"PASS", cmd_pass, 0},
-    {"CWD", NULL, 1},
+    {"CWD", cmd_cwd, 1},
     {"PWD", cmd_pwd, 1},
-    {"CDUP", NULL, 1},
+    {"CDUP", cmd_cdup, 1},
+    {"RETR", cmd_retr, 1},
     {"QUIT", NULL, 1},
     {"REIN", NULL, 1},
     {"TYPE", cmd_type, 1},

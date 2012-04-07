@@ -24,11 +24,19 @@ int		cmd_type(t_info *info, char *str)
       send_answer(info, "Command TYPE need an argument", 501);
       return (0);
     }
-  if (strcmp(arg, "I") != 0)
+  if (strcmp(arg, "I") == 0)
     {
-      send_answer(info, "Argument not implemented for TYPE ", 504);
-      return (0);      
+      send_answer(info, "Type set to I", 200);
+      info->data_type = TYPE_I;
+      return (1);
     }
-  send_answer(info, "Type set to I", 200);
-  return (1);
+  else if (strcmp(arg, "A") == 0)
+    {
+      send_answer(info, "Type set to A", 200);
+      info->data_type = TYPE_A;
+      return (1);
+    }
+  send_answer(info, "Argument not implemented for TYPE ", 504);
+  return (0);      
+
 }
