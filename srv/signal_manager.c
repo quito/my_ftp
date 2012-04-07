@@ -35,6 +35,7 @@ void		manage_sig(int sig)
   g_info.accept_connections = 0;
   g_info.keep_connected = 0;
   close(g_info.csock);
+  close(g_info.socket);
   kill_son(g_info.pid_list);
   manage_signal();
 }

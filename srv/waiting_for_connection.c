@@ -48,7 +48,6 @@ int		waiting_for_connection(t_info *info)
 			   &size);
       if (info->csock == -1)
 	{
-	  perror("accept");
 	  b = 0;
 	  info->accept_connections = 0;
 	}
