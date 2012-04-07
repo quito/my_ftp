@@ -38,7 +38,12 @@ SRC	=	main.c \
 		cmd/pasv.c \
 		cmd/list.c \
 		cmd/cdup.c \
-		cmd/retr.c
+		cmd/retr.c \
+		cmd/mkdir.c \
+		cmd/rmdir.c \
+		cmd/delete.c \
+		cmd/cmd_stor.c \
+		cmd/quit.c
 
 OBJ	=	$(SRC:.c=.o)
 

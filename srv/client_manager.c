@@ -43,7 +43,7 @@ t_cmd		g_cmd_tab[] =
     {"PWD", cmd_pwd, 1},
     {"CDUP", cmd_cdup, 1},
     {"RETR", cmd_retr, 1},
-    {"QUIT", NULL, 1},
+    {"QUIT", cmd_quit, 1},
     {"REIN", NULL, 1},
     {"TYPE", cmd_type, 1},
     {"PASV", cmd_pasv, 1},
@@ -51,13 +51,13 @@ t_cmd		g_cmd_tab[] =
     {"RNFR", NULL, 1},
     {"RNTO", NULL, 2},
     {"ABOR", NULL, 1},
-    {"DELE", NULL, 1},
-    {"RMD", NULL, 1},
-    {"MKD", NULL, 1},
+    {"DELE", cmd_delete, 1},
+    {"RMD", cmd_rmdir, 1},
+    {"MKD", cmd_mkdir, 1},
     {"LIST", cmd_list, 1},
     {"NLST", NULL, 1},
     {"SYST", NULL, 1},
-    {"HELP", NULL, 1},
+    {"STOR", cmd_stor, 1},
     {"NOOP", cmd_noop, 1}
   };
 

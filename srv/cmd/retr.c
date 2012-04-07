@@ -56,7 +56,7 @@ static int	build_buffer(t_info *info, char *buffer, char *arg, int size)
     return (0);
 }
 
-static int	accept_pasv_connection(t_info *info)
+int		accept_pasv_connection(t_info *info)
 {
   unsigned int	size;
 
