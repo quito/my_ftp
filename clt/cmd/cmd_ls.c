@@ -31,7 +31,7 @@ int		cmd_ls(t_info *info, t_cmd *cmd)
 	  return (1);
 	}
       close_dtp(info);
-      return (0);    
+      return (0);
     }
   close_dtp(info);
   return (1);

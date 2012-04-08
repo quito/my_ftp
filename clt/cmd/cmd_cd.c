@@ -1,11 +1,11 @@
 /*
-** cmd_cd.c for  in /home/quito/projet_tmp/my_ftp/clt
+** cmd_cd.c for  in /home/collet_p/projet_tmp/my_ftp
 ** 
 ** Made by pierre collet
 ** Login   <collet_p@epitech.net>
 ** 
-** Started on  Sat Apr  7 22:33:28 2012 pierre collet
-** Last update Sat Apr  7 22:33:28 2012 pierre collet
+** Started on  Sun Apr  8 19:35:55 2012 pierre collet
+** Last update Sun Apr  8 19:35:55 2012 pierre collet
 */
 
 #include <stdlib.h>

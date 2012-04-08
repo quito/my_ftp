@@ -40,7 +40,7 @@ typedef struct		s_dtp
   unsigned short	port;
   struct sockaddr_in	sock_in;
   struct sockaddr	sockaddr;
-  int			socket;  
+  int			socket;
 }			t_dtp;
 
 typedef struct		s_info
@@ -61,7 +61,6 @@ typedef struct	s_cmd_func
   char		*name;
   func_cmd	func;
 }		t_cmd_func;
-
 
 int		init_client(t_info *info, char **av);
 int		init_socket(t_info *info);
@@ -90,4 +89,4 @@ int		cmd_pwd(t_info *info, t_cmd *cmd);
 int		cmd_ls(t_info *info, t_cmd *cmd);
 void		manage_signal();
 
-#endif 
+#endif

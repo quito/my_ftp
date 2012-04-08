@@ -36,7 +36,7 @@ int			init_addr(t_info *info)
 int			init_socket(t_info *info)
 {
   struct protoent	*pe;
-  
+
   if ((pe = getprotobyname("TCP")) == NULL)
     {
       fprintf(stderr, "Cannot perform a getprotobyname\n");
@@ -53,6 +53,6 @@ int			init_socket(t_info *info)
     {
       perror("listen");
       return (0);
-    }    
+    }
   return (1);
 }

@@ -1,18 +1,18 @@
 /*
-** list.c for  in /home/quito/projet_tmp/my_ftp/srv
+** list.c for  in /home/collet_p/projet_tmp/my_ftp
 ** 
 ** Made by pierre collet
 ** Login   <collet_p@epitech.net>
 ** 
-** Started on  Mon Apr  2 16:43:46 2012 pierre collet
-** Last update Mon Apr  2 16:43:46 2012 pierre collet
+** Started on  Sun Apr  8 20:24:08 2012 pierre collet
+** Last update Sun Apr  8 20:24:08 2012 pierre collet
 */
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "server.h"
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "server.h"
 
 void		waiting_for_pid(t_list *list)
 {

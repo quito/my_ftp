@@ -26,7 +26,8 @@ int		cmd_delete(t_info *info, char *str)
       send_answer(info, "Missing Argument.", 501);
       return (0);
     }
-  snprintf(buffer, sizeof(buffer), "%s/%s/%s%s",  info->server_path, ACCOUNT_PATH,
+  snprintf(buffer, sizeof(buffer), "%s/%s/%s%s",
+	   info->server_path, ACCOUNT_PATH,
   	   info->user_selected, arg);
   if (remove(arg) == -1)
     {

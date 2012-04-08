@@ -26,7 +26,6 @@ static int		dtp_init_addr(t_pasv_dtp *info)
   err = bind(info->socket,
 	     (const struct sockaddr *)(&(info->sin)),
 	     sizeof(info->sin));
-  
   if (err == -1)
     {
       perror("Bind");
@@ -38,7 +37,7 @@ static int		dtp_init_addr(t_pasv_dtp *info)
 int			dtp_init_socket(t_pasv_dtp *info)
 {
   struct protoent	*pe;
-  
+
   memset(info, 0, sizeof(*info));
   if ((pe = getprotobyname("TCP")) == NULL)
     {
@@ -61,7 +60,7 @@ int			dtp_init_socket(t_pasv_dtp *info)
 }
 
 static int              build_answer(int fd, int sock_c, char *buf)
-{ 
+{
   socklen_t             l;
   unsigned short        port;
   char                  *ip;
@@ -70,8 +69,8 @@ static int              build_answer(int fd, int sock_c, char *buf)
 
   l = sizeof(struct sockaddr_in);
   if (getsockname(sock_c, (struct sockaddr *)&sp, &l) < 0)
-    { 
-      perror("getsockname"); 
+    {
+      perror("getsockname");
       return (0);
     }
   port = ntohs(sp.sin_port);
@@ -85,7 +84,7 @@ static int              build_answer(int fd, int sock_c, char *buf)
 	   ip[0] & 0xff, ip[1] & 0xff, ip[2] & 0xff, ip[3] & 0xff,
 	   (port >> 8) & 0xff, port & 0xff);
   return (0);
-}  
+}
 
 int		cmd_pasv(t_info *info, char *str)
 {

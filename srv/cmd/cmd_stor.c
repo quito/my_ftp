@@ -27,7 +27,10 @@ static int	get_file(t_info *info, int fd, char *arg)
   if (!accept_pasv_connection(info))
     return (0);
   if (info->data_type == TYPE_A)
-    snprintf(buf, sizeof(buf), "Opening ASCII mode data connection for %s", arg);
+    {
+      snprintf(buf, sizeof(buf), "Opening ASCII mode data"
+	       " connection for %s", arg);
+    }
   else
     snprintf(buf, sizeof(buf), "Opening BIN mode data connection for %s", arg);
   send_answer(info, buf, 150);

@@ -30,7 +30,7 @@ int		cmd_put(t_info *info, t_cmd *cmd)
   t_rep		rep;
   int		fd;
 
-  if((fd = open_file(cmd->arg)) == -1 || !send_cmd(info, "TYPE", "I") ||
+  if ((fd = open_file(cmd->arg)) == -1 || !send_cmd(info, "TYPE", "I") ||
      !get_answer(info, &rep) || !get_pasv(info))
     return (0);
   send_cmd(info, "STOR", cmd->arg);

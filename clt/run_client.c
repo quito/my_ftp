@@ -67,7 +67,7 @@ static int	login_user(t_info *info, t_rep *rep)
 static int	open_session(t_info *info)
 {
   t_rep		rep;
-  
+
   if (!get_answer(info, &rep))
     {
       info->keep_connected = 0;

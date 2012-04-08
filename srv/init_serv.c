@@ -32,7 +32,6 @@ static int	stock_user(t_info *info, char *line, int size, t_user *user)
 {
   int		i;
 
-  
   i = 0;
   if (line)
     {
@@ -64,7 +63,6 @@ static int	get_users(t_info *info)
     {
       perror("fopen");
       fprintf(stderr, "Cannot open userfile\n");
-      /* fprintf(stderr, "FTP server set to Anonymous mode\n"); */
       return (1);
     }
   while (!(line = NULL) && (size = getline(&line, &n, file)) > 0)

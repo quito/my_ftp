@@ -37,6 +37,6 @@ int		cmd_type(t_info *info, char *str)
       return (1);
     }
   send_answer(info, "Argument not implemented for TYPE ", 504);
-  return (0);      
+  return (0);
 
 }

@@ -18,11 +18,12 @@ static char	*get_home(t_info *info)
 {
   char		*home;
 
-  if (asprintf(&home, "%s/%s/%s", info->server_path, ACCOUNT_PATH, info->user_selected) == -1)
+  if (asprintf(&home, "%s/%s/%s", info->server_path, ACCOUNT_PATH,
+	       info->user_selected) == -1)
     {
       fprintf(stderr, "Cannot rebuild user home path");
       return (NULL);
-    } 
+    }
   return (home);
 }
 
@@ -37,7 +38,8 @@ int	find_user_path(t_info *info)
       return (0);
     }
   strcat(current, "/");
-  if (asprintf(&home, "%s/%s/%s", info->server_path, ACCOUNT_PATH, info->user_selected) == -1)
+  if (asprintf(&home, "%s/%s/%s", info->server_path, ACCOUNT_PATH,
+	       info->user_selected) == -1)
     {
       fprintf(stderr, "Cannot rebuild user home path");
       return (0);
@@ -78,7 +80,8 @@ static int	get_real_path(t_info *info, char *path, char **real_path)
 	  return (0);
 	}
     }
-  else if (asprintf(real_path, "%s/%s/%s%s/%s", info->server_path, ACCOUNT_PATH,
+  else if (asprintf(real_path, "%s/%s/%s%s/%s", info->server_path,
+		    ACCOUNT_PATH,
 		    info->user_selected, info->cur_path, path) == -1)
     {
       fprintf(stderr, "Cannot rebuild real path\n");

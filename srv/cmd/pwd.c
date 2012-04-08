@@ -18,7 +18,8 @@ int		cmd_pwd(t_info *info, char *str)
   char		buffer[290];
 
   (void)str;
-  snprintf(buffer, sizeof(buffer), "\"%s\" is current directory.", info->cur_path);
+  snprintf(buffer, sizeof(buffer), "\"%s\" is current directory.",
+	   info->cur_path);
   send_answer(info, buffer, 257);
   return (1);
 }

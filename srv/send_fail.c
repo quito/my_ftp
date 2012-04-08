@@ -20,7 +20,7 @@ int	send_fail(t_info *info, char *str, int num)
 
   memset(buff, 0, sizeof(buff));
   if (str)
-    {    
+    {
       snprintf(buff, 256, "%d %s\n", num, str);
       fprintf(stderr, "%d %s\n", num, str);
     }

@@ -21,7 +21,7 @@ void	delete_endline(char *str)
       if (str[j] == '\n' || str[j] == '\r')
 	str[j] = '\0';
       j++;
-    }  
+    }
 }
 
 char	*get_cmd_arg(char *str)

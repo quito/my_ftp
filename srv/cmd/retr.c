@@ -23,7 +23,8 @@ static int	open_file(t_info *info, char *arg, int *size)
   char		buffer[512];
   struct stat	buf;
 
-  snprintf(buffer, sizeof(buffer), "%s/%s/%s%s/%s",  info->server_path, ACCOUNT_PATH,
+  snprintf(buffer, sizeof(buffer), "%s/%s/%s%s/%s",
+	   info->server_path, ACCOUNT_PATH,
 	   info->user_selected, info->cur_path, arg);
   printf("%s\n", buffer);
   if (stat(buffer, &buf) == -1)
@@ -44,12 +45,14 @@ static int	build_buffer(t_info *info, char *buffer, char *arg, int size)
 {
   if (info->data_type == TYPE_I)
     {
-      snprintf(buffer, 512, "Opening BINARY mode data connection for %s (%d bytes)", arg, size);
+      snprintf(buffer, 512, "Opening BINARY mode data"
+	       " connection for %s (%d bytes)", arg, size);
       return (1);
     }
   else if (info->data_type == TYPE_A)
     {
-      snprintf(buffer, 512, "Opening ASCII mode data connection for %s (%d bytes)", arg, size);
+      snprintf(buffer, 512, "Opening ASCII mode data"
+	       " connection for %s (%d bytes)", arg, size);
       return (1);
     }
   else
@@ -107,7 +110,7 @@ int		cmd_retr(t_info *info, char *str)
   int		fd;
   int		size;
   char		buffer[512];
-  
+
   if ((arg = get_cmd_arg(str)) == NULL || (!arg) || strlen(arg) <= 0)
     {
       send_answer(info, "Missing argument", 501);

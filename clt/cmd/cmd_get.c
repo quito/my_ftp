@@ -31,7 +31,7 @@ int		cmd_get(t_info *info, t_cmd *cmd)
   t_rep		rep;
   int		fd;
 
-  if(!get_pasv(info) || (fd = open_file(cmd->arg)) == -1)
+  if (!get_pasv(info) || (fd = open_file(cmd->arg)) == -1)
     return (0);
   if (!send_cmd(info, "TYPE", "I") || !get_answer(info, &rep))
     return (0);
