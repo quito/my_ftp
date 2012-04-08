@@ -51,7 +51,6 @@ static int	init_dtp_socket(t_dtp *info)
       fprintf(stderr, "Error : Cannot open a socket\n");
       return (0);
     }
-  printf("connection a : |%s|%d|\n", info->ip, info->port);
   info->sock_in.sin_addr.s_addr = inet_addr(info->ip);
   info->sock_in.sin_family = AF_INET;
   info->sock_in.sin_port = htons(info->port);

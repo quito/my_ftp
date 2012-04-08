@@ -20,7 +20,10 @@ static int	move_to_home(t_info *info)
 {
   char		buffer[256];
 
-  snprintf(buffer, 255, "%s/%s", ACCOUNT_PATH, info->user_selected);
+  if (info->user_selected)
+    snprintf(buffer, 255, "%s/%s", ACCOUNT_PATH, info->user_selected);
+  else
+    snprintf(buffer, 255, "/tmp/");
   if (my_chdir("/", info) == -1)
     {
       if (errno == ENOENT)

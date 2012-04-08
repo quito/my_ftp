@@ -63,7 +63,8 @@ static int	get_users(t_info *info)
   if ((file = fopen(USERSFILE, "r")) == NULL)
     {
       perror("fopen");
-      fprintf(stderr, "FTP server set to Anonymous mode");
+      fprintf(stderr, "Cannot open userfile\n");
+      /* fprintf(stderr, "FTP server set to Anonymous mode\n"); */
       return (1);
     }
   while (!(line = NULL) && (size = getline(&line, &n, file)) > 0)
@@ -97,7 +98,7 @@ int	init_serv(t_info *info, char **av)
   info->user_selected = NULL;
   info->dtp = NULL;
   memset(info->cur_path, 0, sizeof(info->cur_path));
-  if (!get_users(info) || !get_path(info))
+  if (!get_users(info) || info->users_list == NULL || !get_path(info))
     return (0);
   manage_signal(1);
   return (1);
