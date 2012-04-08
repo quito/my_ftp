@@ -66,6 +66,7 @@ static int	get_opt(t_info *info, char *ip, char *port)
 
 int	init_client(t_info *info, char **av)
 {
+  manage_signal();
   if (!get_opt(info, av[1], av[2]))
     return (0);
   info->keep_connected = 1;

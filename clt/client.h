@@ -88,5 +88,6 @@ int		cmd_get(t_info *info, t_cmd *cmd);
 int		cmd_put(t_info *info, t_cmd *cmd);
 int		cmd_pwd(t_info *info, t_cmd *cmd);
 int		cmd_ls(t_info *info, t_cmd *cmd);
+void		manage_signal();
 
 #endif 

@@ -17,6 +17,7 @@ all:
 		$(MAKE) -C $(SRV_PATH)
 		cp -f $(CLIENT_PATH)/client .
 		cp -f $(SRV_PATH)/serveur .
+		cp -f $(SRV_PATH)/users.ftp .
 
 clean:
 		$(MAKE) clean -C $(CLIENT_PATH)

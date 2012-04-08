@@ -50,10 +50,19 @@ void		manage_sig_srv(int sig)
   manage_signal(0);
 }
 
+void		useless(int sig)
+{
+  (void)sig;
+  fprintf(stderr, "[-] Connection error\n");
+  manage_signal(2);
+  close_everything(&g_info);
+}
+
 void		manage_signal(int mode)
 {
   if (mode == 1)
     signal(SIGINT, manage_sig);
-  else
+  else if (mode == 0)
     signal(SIGINT, manage_sig_srv);
+  signal(SIGPIPE, useless);
 }

@@ -29,6 +29,7 @@ SRC	=	main.c \
 		get_pasv.c \
 		read_data.c \
 		prompt.c \
+		init_signal.c \
 		run_cmd.c \
 		cmd/cmd_exit.c \
 		cmd/cmd_cd.c \
