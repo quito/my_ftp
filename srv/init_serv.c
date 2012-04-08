@@ -32,6 +32,7 @@ static int	stock_user(t_info *info, char *line, int size, t_user *user)
 {
   int		i;
 
+  
   i = 0;
   if (line)
     {
@@ -65,15 +66,9 @@ static int	get_users(t_info *info)
       fprintf(stderr, "FTP server set to Anonymous mode");
       return (1);
     }
-  if ((users = malloc(sizeof(*users))) == NULL)
-    {
-      fprintf(stderr, "Error Cannot allocate\n");
-      return (0);
-    }
-  users->name = NULL;
-  users->pass = NULL;
   while (!(line = NULL) && (size = getline(&line, &n, file)) > 0)
-    if (stock_user(info, line, size, users) == 0)
+    if ((users = malloc(sizeof(*users))) == NULL ||
+	stock_user(info, line, size, users) == 0)
       return (0);
   fclose(file);
   return (1);
@@ -104,6 +99,6 @@ int	init_serv(t_info *info, char **av)
   memset(info->cur_path, 0, sizeof(info->cur_path));
   if (!get_users(info) || !get_path(info))
     return (0);
-  manage_signal();
+  manage_signal(1);
   return (1);
 }

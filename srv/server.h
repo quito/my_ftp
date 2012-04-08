@@ -80,7 +80,7 @@ void		freelist(t_list *list);
 t_list		*push_back_list(t_list *list, void *data);
 void		waiting_for_pid(t_list *list);
 int		client_manager(t_info *info);
-void		manage_signal(void);
+void		manage_signal(int mode);
 int		write_secure(int fd, char *str, unsigned int size, t_info *info);
 int		send_answer(t_info *info, char *str, int num);
 int		my_chdir(char *path, t_info *info);

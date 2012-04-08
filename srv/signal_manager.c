@@ -37,10 +37,23 @@ void		manage_sig(int sig)
   close(g_info.csock);
   close(g_info.socket);
   kill_son(g_info.pid_list);
-  manage_signal();
+  manage_signal(1);
 }
 
-void		manage_signal(void)
+void		manage_sig_srv(int sig)
 {
-  signal(SIGINT, manage_sig);
+  (void)sig;
+  g_info.accept_connections = 0;
+  g_info.keep_connected = 0;
+  close(g_info.csock);
+  close(g_info.socket);
+  manage_signal(0);
+}
+
+void		manage_signal(int mode)
+{
+  if (mode == 1)
+    signal(SIGINT, manage_sig);
+  else
+    signal(SIGINT, manage_sig_srv);
 }

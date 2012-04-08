@@ -23,7 +23,6 @@ SRC	=	main.c \
 		list.c \
 		signal_manager.c \
 		client_manager.c \
-		ls_dir.c \
 		write_secure.c \
 		send_answer.c \
 		my_chdir.c \

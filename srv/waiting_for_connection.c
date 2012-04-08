@@ -56,5 +56,6 @@ int		waiting_for_connection(t_info *info)
       close(info->csock);
     }
   waiting_for_pid(info->pid_list);
+  close_everything(info);
   return (b);
 }

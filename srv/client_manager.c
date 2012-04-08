@@ -14,27 +14,6 @@
 #include <string.h>
 #include "server.h"
 
-    /* {"CWD", NULL, 1}, */
-    /* {"PWD", NULL, 1}, */
-    /* {"CDUP", NULL, 1}, */
-    /* {"QUIT", NULL, 1}, */
-    /* {"REIN", NULL, 2}, */
-    /* {"TYPE", NULL, 1}, */
-    /* {"PASV", NULL, 1}, */
-    /* {"MODE", NULL, 1}, */
-    /* {"RNFR", NULL, 3}, */
-    /* {"RNTO", NULL, 3}, */
-    /* {"ABOR", NULL, 1}, */
-    /* {"DELE", NULL, 1}, */
-    /* {"RMD", NULL, 1}, */
-    /* {"MKD", NULL, 1}, */
-    /* {"LIST", NULL, 2}, */
-    /* {"NLST", NULL, 2}, */
-    /* {"SYST", NULL, 1}, */
-    /* {"HELP", NULL, 1}, */
-    /* {"NOOP", cmd_noop, 1} */
-
-
 t_cmd		g_cmd_tab[] =
   {
     {"USER", cmd_user, 0},
@@ -64,10 +43,6 @@ t_cmd		g_cmd_tab[] =
 static int	write_welcome_message(t_info *info)
 {
   return (send_answer(info, WELCOME_MSG, 220));
-  /* return (write_secure(info->csock, */
-  /* 		       "220 " WELCOME_MSG "\r\n", */
-  /* 		       strlen("220" WELCOME_MSG "\r\n"), */
-  /* 		       info)); */
 }
 
 static t_cmd	*find_function(char *str)
@@ -95,14 +70,15 @@ int		client_manager(t_info *info)
   char		buffer[BUFF_SIZE + 1];
   t_cmd		*ptr;
 
-  manage_signal();
+  manage_signal(0);
   memset(buffer, 0, sizeof(buffer));
   write_welcome_message(info);
   while (info->keep_connected && read(info->csock, buffer, BUFF_SIZE) > 0)
     {
       delete_endline(buffer);
       printf("%s\n", buffer);
-      if ((ptr = find_function(buffer)) == NULL)
+      if ((ptr = find_function(buffer)) == NULL ||
+	  ptr->ptr == NULL)
 	send_answer(info, "command unrecognized.", 500);
       else if (ptr->category > 0 && !(info->is_auth))
 	send_answer(info, "You are not authentified.", 500);
