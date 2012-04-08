@@ -53,6 +53,7 @@ int		waiting_for_connection(t_info *info)
 	}
       else if (manage_client(info) == 0)
 	info->accept_connections = 0;
+      close(info->csock);
     }
   waiting_for_pid(info->pid_list);
   return (b);

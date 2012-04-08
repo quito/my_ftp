@@ -63,10 +63,11 @@ t_cmd		g_cmd_tab[] =
 
 static int	write_welcome_message(t_info *info)
 {
-  return (write_secure(info->csock,
-		       "220 " WELCOME_MSG "\r\n",
-		       strlen("220" WELCOME_MSG "\r\n"),
-		       info));
+  return (send_answer(info, WELCOME_MSG, 220));
+  /* return (write_secure(info->csock, */
+  /* 		       "220 " WELCOME_MSG "\r\n", */
+  /* 		       strlen("220" WELCOME_MSG "\r\n"), */
+  /* 		       info)); */
 }
 
 static t_cmd	*find_function(char *str)
@@ -109,6 +110,7 @@ int		client_manager(t_info *info)
 	ptr->ptr(info, buffer);
       memset(buffer, 0, sizeof(buffer));
     }
+  close_everything(info);
   printf("[+] Client disconnected\n");
   return (1);
 }

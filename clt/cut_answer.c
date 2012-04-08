@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include "client.h"
 
 char	*get_arg_answer(char *str)
@@ -25,7 +26,7 @@ char	*get_arg_answer(char *str)
   while (str[i] && str[i] == ' ')
     i++;
   if (str[i])
-    return (&(str[i]));
+    return (strdup(&(str[i])));
   return (NULL);
 }
 

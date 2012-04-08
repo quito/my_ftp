@@ -27,6 +27,7 @@ SRC	=	main.c \
 		write_secure.c \
 		send_answer.c \
 		my_chdir.c \
+		close_everything.c \
 		cmd/get_cmd_arg.c \
 		cmd/login.c \
 		cmd/noop.c \

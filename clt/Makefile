@@ -12,7 +12,7 @@ NAME	=	client
 
 CC	=	gcc
 
-CFLAGS	=	-Wall -Wextra -ansi -ggdb -D _BSD_SOURCE
+CFLAGS	=	-Wall -Wextra -ansi -I. -ggdb -D _BSD_SOURCE -D _XOPEN_SOURCE=700
 
 LDFLAGS	=	
 
@@ -22,7 +22,21 @@ SRC	=	main.c \
 		run_client.c \
 		send_cmd.c \
 		cut_answer.c \
-		get_answer.c
+		get_answer.c \
+		write_secure.c \
+		epur_str.c \
+		cut_cmd.c \
+		get_pasv.c \
+		read_data.c \
+		prompt.c \
+		run_cmd.c \
+		cmd/cmd_exit.c \
+		cmd/cmd_cd.c \
+		cmd/cmd_ls.c \
+		cmd/cmd_put.c \
+		cmd/cmd_get.c \
+		cmd/cmd_pwd.c
+
 
 OBJ	=	$(SRC:.c=.o)
 

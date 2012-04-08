@@ -104,5 +104,6 @@ int		cmd_stor(t_info *info, char *str);
 int		cmd_delete(t_info *info, char *str);
 int		cmd_quit(t_info *info, char *str);
 int		accept_pasv_connection(t_info *info);
+void		close_everything(t_info *info);
 
 #endif
