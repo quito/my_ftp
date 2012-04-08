@@ -58,6 +58,7 @@ static int		get_port_value(char *str)
 
   j = 0;
   sum = 0;
+  i = 0;
   while (j < 6)
     {
       if (j > 3)
